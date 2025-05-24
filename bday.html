@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>18th Birthday Countdown</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+        }
+        .container {
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 90%;
+        }
+        h1 {
+            margin: 0 0 10px;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .birthday-info {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        .countdown {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+        .time {
+            margin: 0 15px 20px;
+            min-width: 100px;
+        }
+        .time h2 {
+            font-size: 3rem;
+            margin: 0;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        .time span {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+        .milestone {
+            margin-top: 30px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+        @media (max-width: 580px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .time h2 {
+                font-size: 2.5rem;
+            }
+            .time {
+                margin: 0 10px 20px;
+                min-width: 80px;
+            }
+        }
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.4;
+            animation: float 60s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    <div class="container">
+        <h1>Countdown to Your 18th Birthday</h1>
+        <p class="birthday-info">Born on April 15, 2009</p>
+        <div class="countdown">
+            <div class="time">
+                <h2 id="years">0</h2>
+                <span>Years</span>
+            </div>
+            <div class="time">
+                <h2 id="months">0</h2>
+                <span>Months</span>
+            </div>
+            <div class="time">
+                <h2 id="days">0</h2>
+                <span>Days</span>
+            </div>
+            <div class="time">
+                <h2 id="hours">0</h2>
+                <span>Hours</span>
+            </div>
+            <div class="time">
+                <h2 id="minutes">0</h2>
+                <span>Minutes</span>
+            </div>
+            <div class="time">
+                <h2 id="seconds">0</h2>
+                <span>Seconds</span>
+            </div>
+        </div>
+        <div class="milestone">
+            <p id="percentage">You're currently <span id="percent-complete">0%</span> of the way to 18 years old!</p>
+            <p id="total-days">Total days until 18: <span id="days-left">0</span> days</p>
+            <p id="weeks-left">That's approximately <span id="weeks">0</span> weeks</p>
+            <p id="months-left">Or approximately <span id="total-months">0</span> months</p>
+            <p id="summary">Time remaining: <span id="years-summary">0</span> years, <span id="months-summary">0</span> months, and <span id="days-summary">0</span> days</p>
+        </div>
+    </div>
+
+    <script>
+        // Create floating background particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const colors = ['#ffffff', '#f0f0f0', '#e0e0ff', '#d0d0ff'];
+            
+            for (let i = 0; i < 40; i++) {
+                const size = Math.random() * 30 + 10;
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.animationDuration = `${Math.random() * 60 + 20}s`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Set animation for particles
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes float {
+                0% {
+                    transform: translate(0, 0) rotate(0deg);
+                }
+                25% {
+                    transform: translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px) rotate(90deg);
+                }
+                50% {
+                    transform: translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px) rotate(180deg);
+                }
+                75% {
+                    transform: translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px) rotate(270deg);
+                }
+                100% {
+                    transform: translate(0, 0) rotate(360deg);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        createParticles();
+
+        const birthday = new Date('April 15, 2009');
+        const eighteenthBirthday = new Date('April 15, 2027');
+
+        function updateCountdown() {
+            const now = new Date();
+            const timeDiff = eighteenthBirthday - now;
+            
+            if (timeDiff <= 0) {
+                document.querySelector('.container').innerHTML = '<h1>Happy 18th Birthday! 🎉</h1><p>You\'re officially 18 years old now!</p>';
+                return;
+            }
+            
+            // Calculate time units
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+            
+            // Calculate years and months
+            let yearDiff = eighteenthBirthday.getFullYear() - now.getFullYear();
+            let monthDiff = eighteenthBirthday.getMonth() - now.getMonth();
+            
+            if (monthDiff < 0) {
+                yearDiff--;
+                monthDiff += 12;
+            }
+            
+            // Adjust for days
+            if (eighteenthBirthday.getDate() < now.getDate()) {
+                monthDiff--;
+                if (monthDiff < 0) {
+                    yearDiff--;
+                    monthDiff += 12;
+                }
+            }
+            
+            // Calculate remaining days excluding years and months
+            const monthsToDays = Math.floor(timeDiff / (1000 * 60 * 60 * 24) % 30);
+            
+            // Update the UI
+            document.getElementById('years').innerText = yearDiff;
+            document.getElementById('months').innerText = monthDiff;
+            document.getElementById('days').innerText = monthsToDays;
+            document.getElementById('hours').innerText = hours;
+            document.getElementById('minutes').innerText = minutes;
+            document.getElementById('seconds').innerText = seconds;
+            
+            // Calculate total days until 18
+            document.getElementById('days-left').innerText = days;
+            document.getElementById('weeks').innerText = Math.floor(days / 7);
+            document.getElementById('total-months').innerText = Math.floor(days / 30);
+            
+            // Set summary values
+            document.getElementById('years-summary').innerText = yearDiff;
+            document.getElementById('months-summary').innerText = monthDiff;
+            document.getElementById('days-summary').innerText = monthsToDays;
+            
+            // Calculate percentage complete
+            const birthToEighteen = eighteenthBirthday - birthday;
+            const birthToNow = now - birthday;
+            const percentComplete = (birthToNow / birthToEighteen * 100).toFixed(2);
+            document.getElementById('percent-complete').innerText = `${percentComplete}%`;
+        }
+        
+        // Update countdown every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
